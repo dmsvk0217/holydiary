@@ -3,10 +3,10 @@ import 'package:get/route_manager.dart';
 import 'package:holydiary/view/resources/getx_routes_manager.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:holydiary/getQuestion.dart';
 
-const apiKey = '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';
-const apiUrl = 'https://api.openai.com/v1/completions';
+const apiKey = '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';
+const apiUrl = 'https://api.openai.com/v1/engines/davinci-codex/completions';
+
 //This is our project for mobile app develope lecture
 void main() {
   //  WidgetsFlutterBinding.ensureInitialized();
@@ -14,11 +14,11 @@ void main() {
   //   options: DefaultFirebaseOptions.currentPlatform,
   // );
 
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  MyApp({super.key});
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: "HolyDiary",
       // theme: getApplicationTheme(),
-      initialRoute: Routes.homeRoute,
+      initialRoute: Routes.getQuestionRoute,
       getPages: getPages,
     );
   }
@@ -41,7 +41,8 @@ Future<String> generateText(String prompt) async {
     },
     body: jsonEncode({
       "model": "text-davinci-003",
-      'prompt': prompt,
+      'prompt':
+          "What is $prompt? Tell me like you're explaining to an eight-year-old.",
       'max_tokens': 1000,
       'temperature': 0,
       'top_p': 1,
@@ -51,5 +52,7 @@ Future<String> generateText(String prompt) async {
   );
 
   Map<String, dynamic> newresponse = jsonDecode(response.body);
-  return newresponse['choices'][0]['text'];
+  final generatedText = newresponse['choices'][0]['text'];
+
+  return generatedText;
 }
