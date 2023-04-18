@@ -33,6 +33,7 @@ class MyApp extends StatelessWidget {
 }
 
 Future<String> generateText(String prompt) async {
+  String generatedText = "";
   final response = await http.post(
     Uri.parse(apiUrl),
     headers: {
@@ -43,7 +44,7 @@ Future<String> generateText(String prompt) async {
       "model": "text-davinci-003",
       'prompt':
           "What is $prompt? Tell me like you're explaining to an eight-year-old.",
-      'max_tokens': 1000,
+      'max_tokens': 100,
       'temperature': 0,
       'top_p': 1,
       'frequency_penalty': 0,
@@ -51,8 +52,11 @@ Future<String> generateText(String prompt) async {
     }),
   );
 
-  Map<String, dynamic> newresponse = jsonDecode(response.body);
-  final generatedText = newresponse['choices'][0]['text'];
-
+  if (response.statusCode == 200) {
+    var data = jsonDecode(response.body);
+    generatedText = data['choices'][0]['text'];
+  } else {
+    generatedText = "Error: ${response.reasonPhrase}";
+  }
   return generatedText;
 }
