@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/route_manager.dart';
 import 'package:holydiary/view/resources/getx_routes_manager.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
-const apiKey = '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';
+final openaikey = dotenv.env['openaiapiKey'];
 const apiUrl = 'https://api.openai.com/v1/engines/davinci-codex/completions';
 
 //This is our project for mobile app develope lecture
-void main() {
+void main() async {
   //  WidgetsFlutterBinding.ensureInitialized();
   // await Firebase.initializeApp(
   //   options: DefaultFirebaseOptions.currentPlatform,
   // );
-
+  await dotenv.load(fileName: "lib/.env");
   runApp(const MyApp());
 }
 
@@ -38,7 +39,7 @@ Future<String> generateText(String prompt) async {
     Uri.parse(apiUrl),
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': 'Bearer $apiKey'
+      'Authorization': 'Bearer $openaikey'
     },
     body: jsonEncode({
       "model": "text-davinci-003",
@@ -51,7 +52,6 @@ Future<String> generateText(String prompt) async {
       'presence_penalty': 0
     }),
   );
-
   if (response.statusCode == 200) {
     var data = jsonDecode(response.body);
     generatedText = data['choices'][0]['text'];
