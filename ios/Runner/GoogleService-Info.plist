@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>846809172564-ncb73moaovvn3bbgh5tl5e2vt3sk5oco.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.846809172564-ncb73moaovvn3bbgh5tl5e2vt3sk5oco</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDnZgJeWP7Lxrlstpo5CdiZAKiILY76FBA</string>
+	<key>GCM_SENDER_ID</key>
+	<string>846809172564</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.holydiary</string>
+	<key>PROJECT_ID</key>
+	<string>holydiary-6a58a</string>
+	<key>STORAGE_BUCKET</key>
+	<string>holydiary-6a58a.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:846809172564:ios:165e6f8baabf9bd514bbc1</string>
+</dict>
+</plist>

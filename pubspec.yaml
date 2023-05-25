@@ -38,6 +38,10 @@ dependencies:
   get: ^4.6.5
   animated_bottom_navigation_bar: ^1.2.0
   http: ^0.13.5
+  firebase_auth: ^4.6.1
+  firebase_core: ^2.13.0
+  firebase_storage: ^11.2.1
+  cloud_firestore: ^4.7.1
 
 dev_dependencies:
   flutter_test:

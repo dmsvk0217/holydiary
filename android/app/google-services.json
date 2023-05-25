@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "846809172564",
+    "project_id": "holydiary-6a58a",
+    "storage_bucket": "holydiary-6a58a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:846809172564:android:1ca9a92e9e39c18b14bbc1",
+        "android_client_info": {
+          "package_name": "com.example.holydiary"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "846809172564-scksp4s61m734hec5ib13fgn64om710f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAhFqZkgLSneckYaDtuWmiCzp4ALUU6jn8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "846809172564-scksp4s61m734hec5ib13fgn64om710f.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

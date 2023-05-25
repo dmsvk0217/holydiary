@@ -1,18 +1,17 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
 import 'package:holydiary/view/resources/getx_routes_manager.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:holydiary/getQuestion.dart';
+import 'firebase_options.dart';
 
 const apiKey = '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';
 const apiUrl = 'https://api.openai.com/v1/completions';
-//This is our project for mobile app develope lecture
-void main() {
-  //  WidgetsFlutterBinding.ensureInitialized();
-  // await Firebase.initializeApp(
-  //   options: DefaultFirebaseOptions.currentPlatform,
-  // );
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
   runApp(MyApp());
 }

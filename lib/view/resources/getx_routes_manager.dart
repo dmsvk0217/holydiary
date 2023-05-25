@@ -1,6 +1,6 @@
 import 'package:get/route_manager.dart';
 import 'package:holydiary/getQuestion.dart';
-import 'package:holydiary/view/pages/homepage.dart';
+import 'package:holydiary/view/pages/home_page.dart';
 
 class Routes {
   static const String homeRoute = "/";
