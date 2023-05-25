@@ -1,23 +1,27 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/route_manager.dart';
 import 'package:holydiary/view/resources/getx_routes_manager.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'firebase_options.dart';
 
-const apiKey = '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';
-const apiUrl = 'https://api.openai.com/v1/completions';
+final openaikey = dotenv.env['openaiapiKey'];
+const apiUrl = 'https://api.openai.com/v1/engines/davinci-codex/completions';
 
+//This is our project for mobile app develope lecture
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-
-  runApp(MyApp());
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  await dotenv.load(fileName: "lib/.env");
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  MyApp({super.key});
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -25,30 +29,36 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: "HolyDiary",
       // theme: getApplicationTheme(),
-      initialRoute: Routes.homeRoute,
+      initialRoute: Routes.getQuestionRoute,
       getPages: getPages,
     );
   }
 }
 
 Future<String> generateText(String prompt) async {
+  String generatedText = "";
   final response = await http.post(
     Uri.parse(apiUrl),
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': 'Bearer $apiKey'
+      'Authorization': 'Bearer $openaikey'
     },
     body: jsonEncode({
       "model": "text-davinci-003",
-      'prompt': prompt,
-      'max_tokens': 1000,
+      'prompt':
+          "What is $prompt? Tell me like you're explaining to an eight-year-old.",
+      'max_tokens': 100,
       'temperature': 0,
       'top_p': 1,
       'frequency_penalty': 0,
       'presence_penalty': 0
     }),
   );
-
-  Map<String, dynamic> newresponse = jsonDecode(response.body);
-  return newresponse['choices'][0]['text'];
+  if (response.statusCode == 200) {
+    var data = jsonDecode(response.body);
+    generatedText = data['choices'][0]['text'];
+  } else {
+    generatedText = "Error: ${response.reasonPhrase}";
+  }
+  return generatedText;
 }
