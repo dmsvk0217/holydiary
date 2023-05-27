@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:holydiary/view/pages/biblepage.dart';
 import 'package:holydiary/view/pages/homepage.dart';
 import 'package:holydiary/view/resources/color_manager.dart';
 
@@ -13,7 +14,7 @@ class _BuildPageState extends State<BuildPage> {
   var bottomNavIndex = 0;
 
   PageController pageController = PageController(
-    initialPage: 0,
+    initialPage: 3,
     keepPage: true,
   );
 
@@ -27,19 +28,26 @@ class _BuildPageState extends State<BuildPage> {
       },
       children: <Widget>[
         HomePage(),
-        HomePage(),
-        HomePage(),
-        HomePage(),
-        HomePage(),
+        BiblePage(),
+        BiblePage(),
+        BiblePage(),
+        BiblePage(),
       ],
     );
+  }
+
+  void bottomTapped(int index) {
+    setState(() {
+      bottomNavIndex = index;
+      pageController.jumpToPage(index);
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("HolyDiary"),
+        title: const Text("HolyDiary"),
       ),
       body: buildPageView(),
       bottomNavigationBar: Container(
@@ -53,10 +61,8 @@ class _BuildPageState extends State<BuildPage> {
           unselectedItemColor: ColorManager.navIcon,
           selectedFontSize: 12,
           unselectedFontSize: 12,
-          onTap: (value) {
-            setState(() {
-              bottomNavIndex = value;
-            });
+          onTap: (index) {
+            bottomTapped(index);
           },
           items: const <BottomNavigationBarItem>[
             BottomNavigationBarItem(
