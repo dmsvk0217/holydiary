@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:holydiary/view/pages/biblepage.dart';
-import 'package:holydiary/view/pages/homepage.dart';
+import 'package:holydiary/view/pages/bible_page.dart';
+import 'package:holydiary/view/pages/home_page.dart';
+import 'package:holydiary/view/pages/setting_page.dart';
+import 'package:holydiary/view/pages/timeline_page.dart';
+import 'package:holydiary/view/pages/write_page.dart';
 import 'package:holydiary/view/resources/color_manager.dart';
 
 class BuildPage extends StatefulWidget {
@@ -14,7 +17,7 @@ class _BuildPageState extends State<BuildPage> {
   var bottomNavIndex = 0;
 
   PageController pageController = PageController(
-    initialPage: 3,
+    initialPage: 0,
     keepPage: true,
   );
 
@@ -28,10 +31,10 @@ class _BuildPageState extends State<BuildPage> {
       },
       children: <Widget>[
         HomePage(),
+        TimelinePage(),
+        WritePage(),
         BiblePage(),
-        BiblePage(),
-        BiblePage(),
-        BiblePage(),
+        SettingPage(),
       ],
     );
   }

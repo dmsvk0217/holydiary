@@ -1,8 +1,8 @@
 import 'package:get/route_manager.dart';
 import 'package:holydiary/getQuestion.dart';
 import 'package:holydiary/resultPage.dart';
-import 'package:holydiary/view/pages/buildpage.dart';
-import 'package:holydiary/view/pages/homepage.dart';
+import 'package:holydiary/view/pages/build_page.dart';
+import 'package:holydiary/view/pages/home_page.dart';
 import 'package:holydiary/view/pages/testcompo.dart';
 
 class Routes {
