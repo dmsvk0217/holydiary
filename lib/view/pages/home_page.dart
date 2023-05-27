@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:holydiary/view/component/navbar.dart';
 import 'package:holydiary/view/resources/color_manager.dart';
 
 class HomePage extends StatefulWidget {
@@ -16,7 +15,7 @@ class _HomePageState extends State<HomePage> {
     Center(child: Text("test2")),
     Center(child: Text("test3")),
     Center(child: Text("test4")),
-    Center(child: Text("test4")),
+    Center(child: Text("test5")),
   ];
 
   @override
