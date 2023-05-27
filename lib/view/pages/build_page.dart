@@ -55,7 +55,7 @@ class _BuildPageState extends State<BuildPage> {
       body: buildPageView(),
       bottomNavigationBar: Container(
         color: ColorManager.appbarBackground,
-        height: 70,
+        height: 75,
         child: BottomNavigationBar(
           backgroundColor: ColorManager.appbarBackground,
           type: BottomNavigationBarType.fixed,

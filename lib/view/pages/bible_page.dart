@@ -36,17 +36,45 @@ class BiblePage extends StatelessWidget {
   }
 
   List<AccordionSection> get buildBible {
-    return bibleMataData
-        .map(
-          (map) => AccordionSection(
-            headerBackgroundColor: ColorManager.background,
-            headerBackgroundColorOpened: ColorManager.background,
-            header: Text(map["book"], style: _headerStyle),
-            content: Text(map["chapters"].toString(), style: _contentStyle),
-            contentHorizontalPadding: 20,
-            contentBorderWidth: 0,
+    return bibleMataData.map(
+      (map) {
+        final bookName = map['book'];
+        final chapterCount = map['chapters'];
+
+        return AccordionSection(
+          headerBackgroundColor: ColorManager.background,
+          headerBackgroundColorOpened: ColorManager.background,
+          header: Text(bookName, style: _headerStyle),
+          headerBorderRadius: 0,
+          contentBackgroundColor: ColorManager.background,
+          contentVerticalPadding: 0,
+          contentBorderRadius: 0,
+          content: GridView.builder(
+            shrinkWrap: true,
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 5, // Change the number of columns as desired
+              mainAxisSpacing: 8.0,
+              crossAxisSpacing: 8.0,
+            ),
+            itemCount: chapterCount,
+            itemBuilder: (context, chapterIndex) {
+              final chapterNumber = chapterIndex + 1;
+              return ElevatedButton(
+                onPressed: () {
+                  // Handle button press for the chapter
+                  print('Button pressed: $bookName Chapter $chapterNumber');
+                },
+                style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all<Color>(
+                        ColorManager.background)),
+                child: Text(chapterNumber.toString()),
+              );
+            },
           ),
-        )
-        .toList();
+          contentHorizontalPadding: 20,
+          contentBorderWidth: 0,
+        );
+      },
+    ).toList();
   }
 }

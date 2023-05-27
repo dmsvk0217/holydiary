@@ -10,7 +10,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  DateTime? selectedDay;
+  DateTime? selectedDay = DateTime.now();
   DateTime focusedDay = DateTime.now();
 
   @override
