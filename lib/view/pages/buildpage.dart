@@ -39,7 +39,7 @@ class _BuildPageState extends State<BuildPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("dfff"),
+        title: Text("HolyDiary"),
       ),
       body: buildPageView(),
       bottomNavigationBar: Container(

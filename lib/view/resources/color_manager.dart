@@ -10,8 +10,7 @@ class ColorManager {
   static Color text = HexColor.fromHex("##C9C4CF");
   static Color calenderActive = HexColor.fromHex("#CDBDFA");
   static Color calenderActivetext = HexColor.fromHex("#341F6E");
-
-  static Color primary = HexColor.fromHex("##C9C4CF");
+  static Color calenderTodaytext = HexColor.fromHex("#CDBDFA");
 }
 
 extension HexColor on Color {
