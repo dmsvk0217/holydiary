@@ -10,10 +10,10 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   var iconList = [
-    Icons.check,
-    Icons.check,
-    Icons.check,
-    Icons.check,
+    Icons.today_outlined,
+    Icons.history,
+    Icons.book,
+    Icons.settings,
   ];
   var _bottomNavIndex = 1;
 
