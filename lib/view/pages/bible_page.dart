@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:accordion/accordion.dart';
 import 'package:holydiary/view/resources/bible.dart';
 import 'package:holydiary/view/resources/color_manager.dart';
+import 'dart:io';
 
 class BiblePage extends StatelessWidget {
   BiblePage({super.key});
@@ -35,11 +36,23 @@ class BiblePage extends StatelessWidget {
     );
   }
 
+  Future<String> readBibleTextFile(String bookName) async {
+    try {
+      // Replace 'path_to_your_text_file' with the actual path to your text file
+      File file = File('../resources/$bookName');
+      return await file.readAsString();
+    } catch (e) {
+      print('Error reading the text file: $e');
+      return "Error reading the text file: $e";
+    }
+  }
+
   List<AccordionSection> get buildBible {
     return bibleMataData.map(
       (map) {
         final bookName = map['book'];
         final chapterCount = map['chapters'];
+        String bibleText = '';
 
         return AccordionSection(
           headerBackgroundColor: ColorManager.background,
@@ -60,9 +73,11 @@ class BiblePage extends StatelessWidget {
             itemBuilder: (context, chapterIndex) {
               final chapterNumber = chapterIndex + 1;
               return ElevatedButton(
-                onPressed: () {
+                onPressed: () async {
                   // Handle button press for the chapter
                   print('Button pressed: $bookName Chapter $chapterNumber');
+                  String text = await readBibleTextFile(bookName);
+                  print(text);
                 },
                 style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.all<Color>(
