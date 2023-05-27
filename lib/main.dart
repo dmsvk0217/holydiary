@@ -2,7 +2,11 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/route_manager.dart';
+import 'package:holydiary/view/resources/color_manager.dart';
+import 'package:holydiary/view/resources/font_manager.dart';
 import 'package:holydiary/view/resources/getx_routes_manager.dart';
+import 'package:holydiary/view/resources/styles_manager.dart';
+import 'package:holydiary/view/resources/theme_manager.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'firebase_options.dart';
@@ -28,8 +32,8 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: "HolyDiary",
-      // theme: getApplicationTheme(),
-      initialRoute: Routes.homeRoute,
+      theme: getApplicationTheme(),
+      initialRoute: Routes.buildRoute,
       getPages: getPages,
     );
   }

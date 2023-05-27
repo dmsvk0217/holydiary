@@ -1,27 +1,47 @@
 import 'package:flutter/material.dart';
+import 'package:holydiary/view/pages/homepage.dart';
 import 'package:holydiary/view/resources/color_manager.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+class BuildPage extends StatefulWidget {
+  const BuildPage({super.key});
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<BuildPage> createState() => _BuildPageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _BuildPageState extends State<BuildPage> {
   var bottomNavIndex = 0;
-  var pages = const [
-    Center(child: Text("test1")),
-    Center(child: Text("test2")),
-    Center(child: Text("test3")),
-    Center(child: Text("test4")),
-    Center(child: Text("test5")),
-  ];
+
+  PageController pageController = PageController(
+    initialPage: 0,
+    keepPage: true,
+  );
+
+  Widget buildPageView() {
+    return PageView(
+      controller: pageController,
+      onPageChanged: (index) {
+        setState(() {
+          bottomNavIndex = index;
+        });
+      },
+      children: <Widget>[
+        HomePage(),
+        HomePage(),
+        HomePage(),
+        HomePage(),
+        HomePage(),
+      ],
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: pages[bottomNavIndex],
+      appBar: AppBar(
+        title: Text("dfff"),
+      ),
+      body: buildPageView(),
       bottomNavigationBar: Container(
         color: ColorManager.appbarBackground,
         height: 70,
