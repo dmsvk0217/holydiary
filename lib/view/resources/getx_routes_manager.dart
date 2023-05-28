@@ -3,6 +3,7 @@ import 'package:holydiary/getQuestion.dart';
 import 'package:holydiary/resultPage.dart';
 import 'package:holydiary/view/pages/build_page.dart';
 import 'package:holydiary/view/pages/home_page.dart';
+import 'package:holydiary/view/pages/login_page.dart';
 import 'package:holydiary/view/pages/testcompo.dart';
 
 class Routes {
@@ -11,6 +12,7 @@ class Routes {
   static const String getQuestionRoute = "/getQuestion";
   static const String resultPage = "/result";
   static const String testPage = "/test";
+  static const String loginPage = '/login';
 }
 
 List<GetPage<dynamic>> getPages = [
@@ -37,6 +39,11 @@ List<GetPage<dynamic>> getPages = [
   GetPage(
     name: Routes.testPage,
     page: () => const Testcompo(),
+    transition: Transition.fade,
+  ),
+  GetPage(
+    name: Routes.loginPage,
+    page: () => const LoginPage(), // edit
     transition: Transition.fade,
   ),
 ];

@@ -1,14 +1,32 @@
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
+import 'package:holydiary/view/components/DoneWriteButton.dart';
+import 'package:holydiary/view/components/writingfield.dart';
+import 'package:holydiary/view/components/writingwithphoto.dart';
 
-class WritePage extends StatelessWidget {
+import '../components/todayphoto.dart';
+
+class WritePage extends StatefulWidget {
   const WritePage({super.key});
 
   @override
+  State<WritePage> createState() => _WritePageState();
+}
+
+final _formKey = GlobalKey<FormState>();
+
+class _WritePageState extends State<WritePage> {
+  @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Center(
-        child: Text("WritePage"),
-      ),
+    return Scaffold(
+      body: ListView(children: const [
+        Writingfield(),
+        SizedBox(height: 30),
+        Writingwithphoto(),
+        SizedBox(height: 30),
+        Todayphoto(),
+        SizedBox(height: 30),
+        doneWriteButton(),
+      ]),
     );
   }
 }
