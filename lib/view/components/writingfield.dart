@@ -9,40 +9,48 @@ class Writingfield extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Container(
+        //child: const Text("영성일기"),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
           color: ColorManager.textfield,
         ),
         width: 350,
         height: 220,
-        padding: const EdgeInsets.all(30),
-        child: Stack(
+        padding: const EdgeInsets.fromLTRB(30, 10, 30, 0),
+        child: Column(
           children: [
-            Positioned(
-              top: 0,
-              left: 0,
-              child: Text(
-                '영성일기',
-                style: TextStyle(
-                  color: ColorManager.text,
-                  fontWeight: FontWeightManager.medium,
-                  fontSize: 10,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Text(
+                  "영성일기",
+                  style: TextStyle(
+                      fontSize: FontSize.s14,
+                      fontWeight: FontWeightManager.bold,
+                      color: ColorManager.text),
                 ),
-              ),
+              ],
+            ),
+            const SizedBox(
+              height: 10,
             ),
             SingleChildScrollView(
               child: Container(
+                height: 155,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
                   color: Colors.black,
                 ),
                 padding: const EdgeInsets.all(16),
-                child: Text(
-                  '하늘에 계신 우리 아버지여, 이름이 거여김을 여김을 여김을 여김을 룩히 여김을여여김을 여김을 여김을 여김을 여김을 여김을 여김을 김을 여김을 여김을 여김을 여김을 여김을 여김을 여김을 여김을 여김을 여김을 여김을 여김을 여김을 여김을 여김을 여김을  받으시오며, 나라이 임하옵시며, 뜻이 하늘에서 이룬 것 같이 땅에서도 이루어지이다. 하늘에 계신 우리 아버지여, 이름이 거룩히 여김을 받으시오며, 나라이 임하옵시며, 뜻이 하늘에서 이룬 것 같이 땅에서도 이루어지이다.',
-                  style: TextStyle(
-                    color: ColorManager.text,
-                    fontWeight: FontWeightManager.medium,
-                    fontSize: 12,
+                child: Expanded(
+                  child: TextFormField(
+                    maxLength: 300,
+                    maxLines: 7,
+                    style: TextStyle(
+                      color: ColorManager.text,
+                      fontWeight: FontWeightManager.medium,
+                      fontSize: 12,
+                    ),
                   ),
                 ),
               ),
