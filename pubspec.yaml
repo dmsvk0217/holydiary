@@ -47,7 +47,11 @@ dependencies:
   table_calendar: ^3.0.9
   intl: ^0.18.1
   accordion: ^2.5.1
-  google_sign_in: ^6.1.2
+  google_sign_in: ^5.4.4
+  flutterfire_ui: ^0.4.3+20
+
+dependency_overrides:
+  intl: ^0.18.0
 
 dev_dependencies:
   flutter_test:

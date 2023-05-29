@@ -12,16 +12,6 @@ class BiblePage extends StatelessWidget {
     fontSize: 15,
     fontWeight: FontWeight.bold,
   );
-  final _contentStyleHeader = TextStyle(
-    color: ColorManager.text,
-    fontSize: 14,
-    fontWeight: FontWeight.w700,
-  );
-  final _contentStyle = TextStyle(
-    color: ColorManager.text,
-    fontSize: 14,
-    fontWeight: FontWeight.normal,
-  );
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +29,7 @@ class BiblePage extends StatelessWidget {
   Future<String> readBibleTextFile(String bookName) async {
     try {
       // Replace 'path_to_your_text_file' with the actual path to your text file
-      File file = File('../resources/$bookName');
+      File file = File('assets/bible/$bookName.txt');
       return await file.readAsString();
     } catch (e) {
       print('Error reading the text file: $e');
