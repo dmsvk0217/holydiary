@@ -3,7 +3,12 @@ import 'package:holydiary/view/resources/color_manager.dart';
 import 'package:holydiary/view/resources/font_manager.dart';
 
 class Writedfield extends StatelessWidget {
-  const Writedfield({Key? key}) : super(key: key);
+  Writedfield({
+    Key? key,
+    required this.content,
+  }) : super(key: key);
+
+  final String content;
 
   @override
   Widget build(BuildContext context) {

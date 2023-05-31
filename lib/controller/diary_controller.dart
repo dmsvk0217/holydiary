@@ -1,15 +1,35 @@
+import 'dart:ffi';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:holydiary/model/diary.dart';
+import 'package:intl/intl.dart'; // For date formatting
 
 class DiaryController extends GetxController {
   RxList<Diary> diaryList = RxList<Diary>([]);
-  final db = FirebaseFirestore.instance.collection("diary");
+  Rx<Diary> thisDiary = Rx<Diary>(Diary());
+  final diaryCollection = FirebaseFirestore.instance.collection("diary");
+
+  void getthisDiary(DateTime thisDay) {
+    // thisday.day와 같은 날짜에 속한 diary하나를 가져온다.
+    // thisDiary에 넣는다.
+
+    Timestamp thisdayTimestamp = Timestamp.fromDate(thisDay);
+    thisDiary.value = diaryList.firstWhere(
+      (diary) {
+        print("--------------");
+        print(diary.createdTime!);
+        print(thisdayTimestamp);
+        return checkSameDay(diary.createdTime!, thisdayTimestamp);
+      },
+      orElse: () => Diary(),
+    );
+    print("thisDiary : ${thisDiary.value.content}");
+  }
 
   void onInit() {
     super.onInit();
-    db.snapshots().listen((QuerySnapshot snapshot) {
+    diaryCollection.snapshots().listen((QuerySnapshot snapshot) {
       diaryList.value = snapshot.docs
           .map((doc) => Diary(
                 userid: doc['userid'],
@@ -28,7 +48,7 @@ class DiaryController extends GetxController {
 
     // final userId = FirebaseAuth.instance.currentUser!.uid;
 
-    DocumentReference reference = db.doc();
+    DocumentReference reference = diaryCollection.doc();
 
     await reference.set({
       'userid': "diary.userid",
@@ -55,5 +75,38 @@ class DiaryController extends GetxController {
 
   Future<void> deleteDiary(Diary diary) async {
     await diary.reference!.delete();
+  }
+
+  bool checkSameDay(Timestamp timestamp1, Timestamp timestamp2) {
+    DateTime date1 = timestamp1.toDate();
+    DateTime date2 = timestamp2.toDate();
+    print(date1.toString());
+    print(date2.toString());
+
+    bool isSameDay = date1.year == date2.year &&
+        date1.month == date2.month &&
+        date1.day == date2.day;
+
+    if (isSameDay) {
+      print('The timestamps have the same day.');
+      return true;
+    } else {
+      print('The timestamps have different days.');
+      return false;
+    }
+  }
+
+  bool checkSameMonth(Timestamp timestamp1, DateTime date1) {
+    DateTime date2 = timestamp1.toDate();
+
+    bool isSameMonth = date1.year == date2.year && date1.month == date2.month;
+
+    if (isSameMonth) {
+      print('The timestamps have the same month.');
+      return true;
+    } else {
+      print('The timestamps have different months.');
+      return false;
+    }
   }
 }
