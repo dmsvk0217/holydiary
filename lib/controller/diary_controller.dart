@@ -50,8 +50,6 @@ class DiaryController extends GetxController {
               ))
           .toList();
     });
-    getthisDiary(DateTime.now());
-    getdiaryMonthList(DateTime.now());
   }
 
   Future<void> addDiary(Diary diary) async {

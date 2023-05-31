@@ -49,7 +49,6 @@ dependencies:
   accordion: ^2.5.1
   google_sign_in: ^5.4.4
   flutterfire_ui: ^0.4.3+20
-  month_year_picker: ^0.3.0+1
 
 dependency_overrides:
   intl: ^0.18.0

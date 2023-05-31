@@ -20,6 +20,12 @@ class _HomePageState extends State<HomePage> {
   DateTime focusedDay = DateTime.now();
 
   @override
+  void initState() {
+    super.initState();
+    diaryController.getthisDiary(DateTime.now());
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: ListView(
