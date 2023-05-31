@@ -1,12 +1,11 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:holydiary/controller/diary_controller.dart';
-import 'package:holydiary/model/diary.dart';
 import 'package:holydiary/view/components/writedfield.dart';
 import 'package:holydiary/view/resources/color_manager.dart';
 import 'package:holydiary/view/resources/styles_manager.dart';
 import 'package:table_calendar/table_calendar.dart';
+import 'package:intl/intl.dart'; // For date formatting
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -89,10 +88,9 @@ class _HomePageState extends State<HomePage> {
             height: 100,
             child: Obx(
               () => diaryController.thisDiary.value.userid != null
-                  ? Writedfield(
-                      content: diaryController.thisDiary.value.content!)
+                  ? Writedfield(diary: diaryController.thisDiary.value)
                   : Text(
-                      "${selectedDay.toString()}의 일기가 존재하지 않습니다.",
+                      "${DateFormat('MM월 dd일').format(selectedDay!)}의 일기가 존재하지 않습니다.",
                       style: getMediumStyle(
                         color: ColorManager.text,
                       ),

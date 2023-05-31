@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:holydiary/model/diary.dart';
 import 'package:holydiary/view/components/writedfield.dart';
 
 class TimelinePage extends StatelessWidget {
@@ -7,14 +8,22 @@ class TimelinePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ListView(children: const [
-        Writedfield(),
+      body: ListView(children: [
+        Writedfield(
+          diary: Diary(),
+        ),
         SizedBox(height: 20),
-        Writedfield(),
+        Writedfield(
+          diary: Diary(),
+        ),
         SizedBox(height: 20),
-        Writedfield(),
+        Writedfield(
+          diary: Diary(),
+        ),
         SizedBox(height: 20),
-        Writedfield(),
+        Writedfield(
+          diary: Diary(),
+        ),
         SizedBox(height: 20),
         // Writingfield(),
         // SizedBox(height: 12),
