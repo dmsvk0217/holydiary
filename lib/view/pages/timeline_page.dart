@@ -23,11 +23,10 @@ class _TimelinePageState extends State<TimelinePage> {
     return formatter.format(dateTime);
   }
 
-  String selectedDate = formatToYYMM(DateTime.now());
+  String selectedDateString = formatToYYMM(DateTime.now());
+  DateTime selectedDate = DateTime.now();
 
   void onPressed() async {
-    final DateTime now = DateTime.now();
-
     await showCupertinoDialog(
       context: context,
       barrierDismissible: true,
@@ -37,21 +36,34 @@ class _TimelinePageState extends State<TimelinePage> {
           child: Container(
             color: Colors.white,
             height: 300.0,
-            child: CupertinoDatePicker(
-              showDayOfWeek: true,
-              mode: CupertinoDatePickerMode.date,
-              initialDateTime: DateTime.now(),
-              onDateTimeChanged: (DateTime date) {
-                setState(() {
-                  selectedDate = formatToYYMM(date);
-                });
-              },
+            child: Column(
+              children: [
+                Expanded(
+                  child: CupertinoDatePicker(
+                    showDayOfWeek: true,
+                    mode: CupertinoDatePickerMode.date,
+                    initialDateTime: selectedDate,
+                    onDateTimeChanged: (DateTime date) {
+                      setState(() {
+                        selectedDateString = formatToYYMM(date);
+                        selectedDate = date;
+                      });
+                    },
+                  ),
+                ),
+                TextButton(
+                  onPressed: () => Get.back(),
+                  child: Text("확인"),
+                ),
+              ],
             ),
           ),
         );
       },
     );
-    // getting select month diarylist
+    // Todo : getting select month diarylist on the oage
+    diaryController.getdiaryMonthList(selectedDate);
+    return;
   }
 
   @override
@@ -62,29 +74,32 @@ class _TimelinePageState extends State<TimelinePage> {
           TextButton(
             onPressed: onPressed,
             child: Text(
-              selectedDate,
+              selectedDateString,
               style: getMediumStyle(
                 color: ColorManager.text,
               ),
             ),
           ),
-          Obx(() => Expanded(
-                child: ListView.builder(
-                  itemCount: diaryController.diaryList.length,
-                  itemBuilder: (context, index) {
-                    Diary diary = diaryController.diaryList[index];
-                    return diaryController.diaryList.length != 0
-                        ? Writedfield(diary: diary)
-                        : Text(
-                            // "${DateFormat('MM월').format(selectedDay!)}의 일기가 존재하지 않습니다.",
-                            "MM월의 일기가 존재하지 않습니다.",
-                            style: getMediumStyle(
-                              color: ColorManager.text,
-                            ),
-                          );
-                  },
-                ),
-              )),
+          Obx(
+            () => Expanded(
+              child: ListView.builder(
+                itemCount: diaryController.diaryMonthList.length,
+                itemBuilder: (context, index) {
+                  Diary diary = diaryController.diaryMonthList[index];
+                  print("diaryController.diaryMonthList.length != 0");
+                  print(diaryController.diaryMonthList.length != 0);
+                  return diaryController.diaryMonthList.length != 0
+                      ? Writedfield(diary: diary)
+                      : Text(
+                          "$selectedDateString의 일기가 존재하지 않습니다.",
+                          style: getMediumStyle(
+                            color: Colors.white,
+                          ),
+                        );
+                },
+              ),
+            ),
+          ),
         ],
       ),
     );

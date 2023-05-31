@@ -9,7 +9,19 @@ class DiaryController extends GetxController {
   Rx<Diary> thisDiary = Rx<Diary>(Diary());
   final diaryCollection = FirebaseFirestore.instance.collection("diary");
 
-  void getdiaryMonthList() {}
+  void getdiaryMonthList(DateTime targetDate) {
+    diaryMonthList.value = diaryList
+        .where((diary) =>
+            diary.createdTime!.toDate().year == targetDate.year &&
+            diary.createdTime!.toDate().month == targetDate.month)
+        .toList();
+    print("diaryMonthList.length");
+    print(diaryMonthList.length);
+    if (diaryMonthList.length == 0) {
+      diaryMonthList.value = RxList<Diary>([]);
+    }
+    return;
+  }
 
   void getthisDiary(DateTime thisDay) {
     Timestamp thisdayTimestamp = Timestamp.fromDate(thisDay);
@@ -38,6 +50,8 @@ class DiaryController extends GetxController {
               ))
           .toList();
     });
+    getthisDiary(DateTime.now());
+    getdiaryMonthList(DateTime.now());
   }
 
   Future<void> addDiary(Diary diary) async {
