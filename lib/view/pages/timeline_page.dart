@@ -82,22 +82,24 @@ class _TimelinePageState extends State<TimelinePage> {
           ),
           Obx(
             () => Expanded(
-              child: ListView.builder(
-                itemCount: diaryController.diaryMonthList.length,
-                itemBuilder: (context, index) {
-                  Diary diary = diaryController.diaryMonthList[index];
-                  print("diaryController.diaryMonthList.length != 0");
-                  print(diaryController.diaryMonthList.length != 0);
-                  return diaryController.diaryMonthList.length != 0
-                      ? Writedfield(diary: diary)
-                      : Text(
-                          "$selectedDateString의 일기가 존재하지 않습니다.",
-                          style: getMediumStyle(
-                            color: Colors.white,
-                          ),
-                        );
-                },
-              ),
+              child: diaryController.diaryMonthList.length == 0
+                  ? Center(
+                      child: Text(
+                        "$selectedDateString의 일기가 존재하지 않습니다.",
+                        style: getMediumStyle(
+                          color: Colors.white,
+                        ),
+                      ),
+                    )
+                  : ListView.builder(
+                      itemCount: diaryController.diaryMonthList.length,
+                      itemBuilder: (context, index) {
+                        Diary diary = diaryController.diaryMonthList[index];
+                        print("diaryController.diaryMonthList.length != 0");
+                        print(diaryController.diaryMonthList.length != 0);
+                        return Writedfield(diary: diary);
+                      },
+                    ),
             ),
           ),
         ],
