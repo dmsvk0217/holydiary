@@ -5,13 +5,13 @@ import 'package:intl/intl.dart'; // For date formatting
 
 class DiaryController extends GetxController {
   RxList<Diary> diaryList = RxList<Diary>([]);
+  RxList<Diary> diaryMonthList = RxList<Diary>([]);
   Rx<Diary> thisDiary = Rx<Diary>(Diary());
   final diaryCollection = FirebaseFirestore.instance.collection("diary");
 
-  void getthisDiary(DateTime thisDay) {
-    // thisday.day와 같은 날짜에 속한 diary하나를 가져온다.
-    // thisDiary에 넣는다.
+  void getdiaryMonthList() {}
 
+  void getthisDiary(DateTime thisDay) {
     Timestamp thisdayTimestamp = Timestamp.fromDate(thisDay);
     thisDiary.value = diaryList.firstWhere(
       (diary) {

@@ -8,6 +8,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'firebase_options.dart';
 import 'package:intl/date_symbol_data_local.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 final openaikey = dotenv.env['openaiapiKey'];
 const apiUrl = 'https://api.openai.com/v1/engines/davinci-codex/completions';
@@ -29,6 +30,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+      localizationsDelegates: [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: [
+        const Locale('ko', ''), // Add Korean locale
+      ],
       debugShowCheckedModeBanner: false,
       title: "HolyDiary",
       theme: getApplicationTheme(),
