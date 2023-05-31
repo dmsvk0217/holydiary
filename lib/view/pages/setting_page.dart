@@ -34,12 +34,62 @@ class SettingPage extends StatelessWidget {
               borderRadius: BorderRadius.circular(10),
               color: ColorManager.textfield,
             ),
-            child: const Column(
+            child: Column(
               children: [
-                Text("data"),
-                Text("data"),
-                Text("data"),
-                Text("data"),
+                Row(
+                  children: [
+                    const SizedBox(
+                      width: 30,
+                    ),
+                    TextButton.icon(
+                      onPressed: () {},
+                      icon: Icon(
+                        Icons.phone_android,
+                        size: 16,
+                        color: ColorManager.navIcon,
+                      ),
+                      label: Text(
+                        "의견 보내기",
+                        style: TextStyle(
+                            fontSize: FontSize.s14, color: ColorManager.text),
+                      ),
+                    ),
+                  ],
+                ),
+                Divider(
+                  color: ColorManager.text,
+                  thickness: 0.2,
+                  height: 0,
+                  indent: 20,
+                  endIndent: 20,
+                ),
+                Row(
+                  children: [
+                    const SizedBox(
+                      width: 30,
+                    ),
+                    TextButton.icon(
+                      onPressed: () {},
+                      icon: Icon(
+                        Icons.phone_android,
+                        size: 16,
+                        color: ColorManager.navIcon,
+                      ),
+                      label: Text(
+                        "의견 가위내기",
+                        style: TextStyle(
+                            fontSize: FontSize.s14, color: ColorManager.text),
+                      ),
+                    ),
+                  ],
+                ),
+                Divider(
+                  color: ColorManager.text,
+                  thickness: 0.2,
+                  height: 0,
+                  indent: 20,
+                  endIndent: 20,
+                ),
               ],
             ),
           ),
