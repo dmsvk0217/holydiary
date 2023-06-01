@@ -9,7 +9,7 @@ import 'package:intl/date_symbol_data_local.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 final openaikey = dotenv.env['openaiapiKey'];
-const apiUrl = 'https://api.openai.com/v1/engines/davinci-codex/completions';
+const apiUrl = 'https://api.openai.com/v1/engines/text-davinci-003/completions';
 
 //This is our project for mobile app develope lecture
 void main() async {
@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: "HolyDiary",
       theme: getApplicationTheme(),
-      initialRoute: Routes.authPage,
+      initialRoute: Routes.getQuestionRoute,
       getPages: getPages,
       localizationsDelegates: const [
         // 다언어 설정

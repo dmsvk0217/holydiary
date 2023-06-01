@@ -23,7 +23,7 @@ Future<String> generateText(String prompt) async {
       'Authorization': 'Bearer $openaikey'
     },
     body: jsonEncode({
-      "model": "text-davinci-003",
+      //"model": "text-davinci-003",
       'prompt':
           "What is $prompt? Tell me like you're explaining to an eight-year-old.",
       'max_tokens': 15,
