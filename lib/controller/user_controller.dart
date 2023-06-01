@@ -50,6 +50,10 @@ class UserController extends GetxController {
     );
   }
 
+  Future<void> logOut() async {
+    await FirebaseAuth.instance.signOut();
+  }
+
   Future<void> addGoogleUser() async {
     CollectionReference user = FirebaseFirestore.instance.collection('user');
     await user.doc(uid.value).set(
