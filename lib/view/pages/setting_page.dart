@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:holydiary/controller/user_controller.dart';
 import 'package:holydiary/view/resources/color_manager.dart';
 import 'package:holydiary/view/resources/font_manager.dart';
+import 'package:holydiary/view/resources/getx_routes_manager.dart';
+
+// keytool -list -v -alias androiddebugkey -keystore ~/.android/debug.keystore
+// keytool -list -v -keystore debug.keystore -alias androiddebugkey
 
 class SettingPage extends StatelessWidget {
-  const SettingPage({super.key});
+  SettingPage({super.key});
+  final UserController userController = Get.put(UserController());
 
   @override
   Widget build(BuildContext context) {
@@ -69,7 +76,9 @@ class SettingPage extends StatelessWidget {
                       width: 30,
                     ),
                     TextButton.icon(
-                      onPressed: () {},
+                      onPressed: () async {
+                        await userController.logOut();
+                      },
                       icon: Icon(
                         Icons.phone_android,
                         size: 16,

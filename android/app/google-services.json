@@ -14,7 +14,15 @@
       },
       "oauth_client": [
         {
-          "client_id": "846809172564-scksp4s61m734hec5ib13fgn64om710f.apps.googleusercontent.com",
+          "client_id": "846809172564-ct46alc5pgjs4ecjkhl8lcmkqjq75deu.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.holydiary",
+            "certificate_hash": "7985e5c6b30a05f5aa5f26f0b3d5a98372ac1477"
+          }
+        },
+        {
+          "client_id": "846809172564-lftl87dj6814nr1fotmlf1l8d3oj2e6o.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
@@ -27,8 +35,15 @@
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "846809172564-scksp4s61m734hec5ib13fgn64om710f.apps.googleusercontent.com",
+              "client_id": "846809172564-lftl87dj6814nr1fotmlf1l8d3oj2e6o.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "846809172564-ncb73moaovvn3bbgh5tl5e2vt3sk5oco.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.holydiary"
+              }
             }
           ]
         }

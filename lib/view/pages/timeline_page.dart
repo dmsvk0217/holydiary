@@ -18,6 +18,12 @@ class TimelinePage extends StatefulWidget {
 class _TimelinePageState extends State<TimelinePage> {
   final DiaryController diaryController = Get.put(DiaryController());
 
+  @override
+  void initState() {
+    super.initState();
+    diaryController.getdiaryMonthList(DateTime.now());
+  }
+
   static String formatToYYMM(DateTime dateTime) {
     final DateFormat formatter = DateFormat('yy년 MM월');
     return formatter.format(dateTime);

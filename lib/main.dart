@@ -28,19 +28,22 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: "HolyDiary",
+      theme: getApplicationTheme(),
+      initialRoute: Routes.authPage,
+      getPages: getPages,
       localizationsDelegates: const [
+        // 다언어 설정
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
       ],
       supportedLocales: const [
-        Locale('ko', ''), // Add Korean locale
+        // 다언어 설정
+        Locale('ko', ''), //한국어
+        Locale('en', ''), //영어
       ],
-      debugShowCheckedModeBanner: false,
-      title: "HolyDiary",
-      theme: getApplicationTheme(),
-      initialRoute: Routes.getQuestionRoute,
-      getPages: getPages,
     );
   }
 }
