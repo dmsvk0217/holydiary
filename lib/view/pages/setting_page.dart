@@ -76,7 +76,7 @@ class SettingPage extends StatelessWidget {
                         color: ColorManager.navIcon,
                       ),
                       label: Text(
-                        "의견 가위내기",
+                        "로그아웃",
                         style: TextStyle(
                             fontSize: FontSize.s14, color: ColorManager.text),
                       ),
