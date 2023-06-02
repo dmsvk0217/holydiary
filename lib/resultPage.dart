@@ -26,7 +26,7 @@ Future<String> generateText(String prompt) async {
       //"model": "text-davinci-003",
       'prompt':
           "What is $prompt? Tell me like you're explaining to an eight-year-old.",
-      'max_tokens': 15,
+      'max_tokens': 100,
       'temperature': 0,
       'top_p': 1,
       // 'frequency_penalty': 0,

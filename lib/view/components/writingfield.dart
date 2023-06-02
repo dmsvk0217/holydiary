@@ -9,7 +9,6 @@ class Writingfield extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Container(
-        //child: const Text("영성일기"),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
           color: ColorManager.textfield,
@@ -25,24 +24,25 @@ class Writingfield extends StatelessWidget {
                 Text(
                   "영성일기",
                   style: TextStyle(
-                      fontSize: FontSize.s14,
-                      fontWeight: FontWeightManager.bold,
-                      color: ColorManager.text),
+                    fontSize: FontSize.s14,
+                    fontWeight: FontWeightManager.bold,
+                    color: ColorManager.text,
+                  ),
                 ),
               ],
             ),
             const SizedBox(
               height: 10,
             ),
-            SingleChildScrollView(
-              child: Container(
-                height: 155,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  color: Colors.black,
-                ),
-                padding: const EdgeInsets.all(16),
-                child: Expanded(
+            Expanded(
+              child: SingleChildScrollView(
+                child: Container(
+                  height: 155,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: Colors.black,
+                  ),
+                  padding: const EdgeInsets.all(16),
                   child: TextFormField(
                     maxLength: 300,
                     maxLines: 7,
