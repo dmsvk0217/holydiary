@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: "HolyDiary",
       theme: getApplicationTheme(),
-      initialRoute: Routes.buildRoute,
+      initialRoute: Routes.authPage,
       getPages: getPages,
       localizationsDelegates: const [
         // 다언어 설정

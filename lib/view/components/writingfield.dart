@@ -42,6 +42,10 @@ class DiaryTextFiled extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    TextEditingController textEditingController = TextEditingController(
+      text: userController.content.value,
+    );
+
     return Expanded(
       child: SingleChildScrollView(
         child: Container(
@@ -51,18 +55,23 @@ class DiaryTextFiled extends StatelessWidget {
             color: Colors.black,
           ),
           padding: const EdgeInsets.all(16),
-          child: Obx(
-            () => TextFormField(
-              controller: TextEditingController(
-                text: userController.content.value,
-              ),
-              maxLength: 3000,
-              maxLines: 1000,
-              style: TextStyle(
-                color: ColorManager.text,
-                fontWeight: FontWeightManager.medium,
-                fontSize: 12,
-              ),
+          child: TextFormField(
+            controller: textEditingController,
+            onChanged: (value) {
+              final TextSelection previousCursorPos =
+                  textEditingController.selection;
+
+              userController.content.value = value;
+
+              textEditingController.text = value;
+              textEditingController.selection = previousCursorPos;
+            },
+            maxLength: 3000,
+            maxLines: 1000,
+            style: TextStyle(
+              color: ColorManager.text,
+              fontWeight: FontWeightManager.medium,
+              fontSize: 12,
             ),
           ),
         ),

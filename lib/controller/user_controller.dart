@@ -7,10 +7,11 @@ class UserController extends GetxController {
   RxString email = "".obs;
   RxString image = "".obs;
   RxString name = "".obs;
+  RxInt bottomNavIndex = 0.obs;
 
   // used in writing diary page
-  RxString contentGPT = "this is contentGPT".obs;
-  RxString content = "this is content".obs;
+  RxString contentGPT = "".obs;
+  RxString content = "".obs;
 
   void onInit() {
     super.onInit();
