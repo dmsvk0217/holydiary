@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:accordion/accordion.dart';
 import 'package:get/get.dart';
@@ -5,6 +7,7 @@ import 'package:holydiary/view/resources/bible.dart';
 import 'package:holydiary/view/resources/color_manager.dart';
 import 'package:holydiary/view/resources/getx_routes_manager.dart';
 import 'package:flutter/services.dart' show rootBundle;
+import 'package:path/path.dart' as path;
 
 class BiblePage extends StatelessWidget {
   BiblePage({super.key});
@@ -28,19 +31,45 @@ class BiblePage extends StatelessWidget {
     );
   }
 
-  Future<String> loadAsset(String book) async {
-    return await rootBundle.loadString('assets/bible/aa.txt').then((value) {
+  Future<String> reloadTextFile(String filePath) async {
+    print("filePath : $filePath");
+    File file = File(filePath);
+    if (await file.exists()) {
+      return await file.readAsString();
+    } else {
+      throw Exception('File does not exist');
+    }
+  }
+
+//"assets/bible/Deuteronomy.txt".
+  Future<String> loadAsset(String txtfileName) async {
+    print("txtfileName : $txtfileName");
+    String mypath = path.join('assets', 'bible', txtfileName);
+    print("mypath : $mypath");
+
+    String projectPath =
+        path.dirname(path.dirname(path.fromUri(Platform.script)));
+    print('Project Path: $projectPath');
+
+    try {
+      String result = await reloadTextFile(mypath);
+      print("result : $result");
+    } catch (e) {
+      print('Error: $e');
+    }
+
+    return await rootBundle.loadString(mypath).then((value) {
       print(value);
       return value;
     });
   }
 
   List<AccordionSection> get buildBible {
-    return bibleMataData.map(
+    return bibleMetaData.map(
       (map) {
-        final bookName = map['book'];
-        final chapterCount = map['chapters'];
-        String bibleText = '';
+        final String bookName = map['book'];
+        final int chapterCount = map['chapters'];
+        final String englishName = map['english_name'];
 
         return AccordionSection(
           headerBackgroundColor: ColorManager.background,
@@ -62,8 +91,10 @@ class BiblePage extends StatelessWidget {
               final chapterNumber = chapterIndex + 1;
               return ElevatedButton(
                 onPressed: () async {
-                  print('Button pressed: $bookName Chapter $chapterNumber');
-                  String text = await loadAsset(bookName);
+                  print(
+                      'Button pressed: $bookName Chapter $chapterNumber englishName $englishName');
+                  String txtfileName = "$englishName.txt";
+                  String text = await loadAsset(txtfileName);
                   Get.toNamed(Routes.bibleReadPage,
                       arguments: [text, bookName]);
                 },
