@@ -5,7 +5,6 @@ import 'package:holydiary/controller/diary_controller.dart';
 import 'package:holydiary/controller/user_controller.dart';
 import 'package:flutterfire_ui/auth.dart';
 import 'package:holydiary/view/pages/build_page.dart';
-import 'package:holydiary/view/pages/home_page.dart';
 
 class AuthGate extends StatelessWidget {
   AuthGate({Key? key}) : super(key: key);
