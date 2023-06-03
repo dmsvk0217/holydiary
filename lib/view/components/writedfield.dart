@@ -5,7 +5,7 @@ import 'package:holydiary/view/resources/font_manager.dart';
 import 'package:intl/intl.dart';
 
 class Writedfield extends StatelessWidget {
-  Writedfield({
+  const Writedfield({
     Key? key,
     required this.diary,
   }) : super(key: key);

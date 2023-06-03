@@ -38,6 +38,7 @@ class _WritingwithphotoState extends State<Writingwithphoto> {
     setState(() {
       parsedtext = result['ParsedResults'][0]['ParsedText'];
     });
+    print(parsedtext);
   }
 
   @override
@@ -84,7 +85,7 @@ class _WritingwithphotoState extends State<Writingwithphoto> {
                   color: ColorManager.text,
                   iconSize: 70,
                 ),
-              )
+              ),
             ],
           ),
         ),
