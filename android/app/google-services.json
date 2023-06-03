@@ -14,11 +14,11 @@
       },
       "oauth_client": [
         {
-          "client_id": "846809172564-ct46alc5pgjs4ecjkhl8lcmkqjq75deu.apps.googleusercontent.com",
+          "client_id": "846809172564-i0d9ujpb4o1ahdejtbqelr4sas82472l.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.example.holydiary",
-            "certificate_hash": "7985e5c6b30a05f5aa5f26f0b3d5a98372ac1477"
+            "certificate_hash": "7d6665214606aa4b8ef3205a4ef307e75a9890ee"
           }
         },
         {

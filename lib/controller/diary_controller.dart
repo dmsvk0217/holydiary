@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:holydiary/model/diary.dart';
 import 'package:intl/intl.dart'; // For date formatting
@@ -56,12 +57,12 @@ class DiaryController extends GetxController {
     print("[adddiary] start");
     print("[adddiary]1 $diary");
 
-    // final userId = FirebaseAuth.instance.currentUser!.uid;
+    final userId = FirebaseAuth.instance.currentUser!.uid;
 
     DocumentReference reference = diaryCollection.doc();
 
     await reference.set({
-      'userid': "diary.userid",
+      'userid': userId,
       'content': diary.content,
       'contentGPT': diary.contentGPT,
       'createdTime': FieldValue.serverTimestamp(),

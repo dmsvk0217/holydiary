@@ -26,7 +26,8 @@ void main() async {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-
+// keytool -list -v -alias androiddebugkey -keystore ~/.android/debug.keystore
+// keytool -list -v -keystore ~/.android/debug.keystore -alias androiddebugkey -storepass android -keypass android
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(

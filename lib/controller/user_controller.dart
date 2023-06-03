@@ -8,6 +8,10 @@ class UserController extends GetxController {
   RxString image = "".obs;
   RxString name = "".obs;
 
+  // used in writing diary page
+  RxString contentGPT = "this is content".obs;
+  RxString content = "this is contentGPT".obs;
+
   void onInit() {
     super.onInit();
     FirebaseAuth.instance.authStateChanges().listen((User? user) async {
