@@ -9,8 +9,8 @@ class UserController extends GetxController {
   RxString name = "".obs;
 
   // used in writing diary page
-  RxString contentGPT = "this is content".obs;
-  RxString content = "this is contentGPT".obs;
+  RxString contentGPT = "this is contentGPT".obs;
+  RxString content = "this is content".obs;
 
   void onInit() {
     super.onInit();

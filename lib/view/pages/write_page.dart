@@ -19,16 +19,17 @@ class _WritePageState extends State<WritePage> {
     return Scaffold(
       body: ListView(
         children: [
-          TextButton(
-            onPressed: () async {},
-            child: Text("translate image text"),
-          ),
-          Writingfield(),
-          SizedBox(height: 30),
-          Writingwithphoto(),
-          SizedBox(height: 30),
-          Todayphoto(),
-          SizedBox(height: 30),
+          const SizedBox(height: 30),
+          // 영성일기
+          const Writingfield(),
+          const SizedBox(height: 30),
+          // 사진으로쓰기
+          const Writingwithphoto(),
+          const SizedBox(height: 30),
+          // 오늘의 사진
+          const Todayphoto(),
+          const SizedBox(height: 30),
+          // 작성완료 버튼
           doneWriteButton(),
         ],
       ),

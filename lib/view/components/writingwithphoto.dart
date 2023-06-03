@@ -1,6 +1,9 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:get/get.dart';
+import 'package:holydiary/controller/user_controller.dart';
 import 'package:holydiary/main.dart';
+import 'package:holydiary/view/components/loadingdialog.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:holydiary/view/resources/color_manager.dart';
@@ -15,9 +18,10 @@ class Writingwithphoto extends StatefulWidget {
 }
 
 class _WritingwithphotoState extends State<Writingwithphoto> {
+  UserController userController = Get.put(UserController());
   String parsedtext = '';
 
-  Future _getFromGallery() async {
+  Future _getFromGallery(BuildContext context) async {
     final pickedFile =
         await ImagePicker().pickImage(source: ImageSource.gallery);
     if (pickedFile == null) return;
@@ -32,13 +36,16 @@ class _WritingwithphotoState extends State<Writingwithphoto> {
     };
     var header = {"apikey": "$ocrapikey"};
 
+    MyLoadingDialog.show(context);
     var post = await http.post(Uri.parse(url), body: payload, headers: header);
     var result = jsonDecode(post.body);
+    MyLoadingDialog.hide(context);
 
     setState(() {
       parsedtext = result['ParsedResults'][0]['ParsedText'];
+      userController.content.value = parsedtext;
+      print(parsedtext);
     });
-    print(parsedtext);
   }
 
   @override
@@ -80,7 +87,7 @@ class _WritingwithphotoState extends State<Writingwithphoto> {
                 child: IconButton(
                   icon: const Icon(Icons.add),
                   onPressed: () {
-                    _getFromGallery();
+                    _getFromGallery(context);
                   },
                   color: ColorManager.text,
                   iconSize: 70,
