@@ -5,6 +5,7 @@ import 'package:holydiary/controller/diary_controller.dart';
 import 'package:holydiary/controller/user_controller.dart';
 import 'package:holydiary/main.dart';
 import 'package:holydiary/model/diary.dart';
+import 'package:holydiary/util.dart';
 import 'package:holydiary/view/components/loadingdialog.dart';
 import 'package:holydiary/view/resources/color_manager.dart';
 import 'package:holydiary/view/resources/font_manager.dart';

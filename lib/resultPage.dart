@@ -1,9 +1,8 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
+import 'package:holydiary/util.dart';
 import 'package:holydiary/view/resources/color_manager.dart';
 import 'package:http/http.dart' as http;
-import 'main.dart';
+import 'dart:convert';
 
 class ResultPage extends StatefulWidget {
   final String prompt;
