@@ -85,7 +85,6 @@ class DiaryController extends GetxController {
     print("[adddiary] start5");
 
     DocumentReference reference = diaryCollection.doc();
-
     print("[adddiary] start6");
     await reference.set({
       'userid': userId,

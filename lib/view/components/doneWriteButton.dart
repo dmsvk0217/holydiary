@@ -34,7 +34,7 @@ class doneWriteButton extends StatelessWidget {
           );
           await diaryController.addDiary(diary);
           MyLoadingDialog.hide(context);
-          userController.bottomNavIndex.value = 0;
+          userController.focusNode.unfocus();
         } catch (e) {
           print("Error on writing : $e");
         }
