@@ -28,7 +28,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ListView(
+      body: Column(
         children: [
           TableCalendar(
             daysOfWeekHeight: 40,
@@ -90,17 +90,20 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
           ),
-          SizedBox(
-            height: 100,
-            child: Obx(
-              () => diaryController.thisDiary.value.userid != null
-                  ? Writedfield(diary: diaryController.thisDiary.value)
-                  : Text(
-                      "${DateFormat('MM월 dd일').format(selectedDay!)}의 일기가 존재하지 않습니다.",
-                      style: getMediumStyle(
-                        color: ColorManager.text,
-                      ),
-                    ),
+          Expanded(
+            child: ListView(
+              children: [
+                Obx(
+                  () => diaryController.thisDiary.value.userid != null
+                      ? Writedfield(diary: diaryController.thisDiary.value)
+                      : Text(
+                          "${DateFormat('MM월 dd일').format(selectedDay!)}의 일기가 존재하지 않습니다.",
+                          style: getMediumStyle(
+                            color: ColorManager.text,
+                          ),
+                        ),
+                ),
+              ],
             ),
           ),
         ],
