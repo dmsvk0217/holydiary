@@ -1,6 +1,10 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:get/get.dart';
+import 'package:holydiary/controller/user_controller.dart';
 import 'package:holydiary/model/diary.dart';
 import 'package:intl/intl.dart'; // For date formatting
 
@@ -8,7 +12,16 @@ class DiaryController extends GetxController {
   RxList<Diary> diaryList = RxList<Diary>([]);
   RxList<Diary> diaryMonthList = RxList<Diary>([]);
   Rx<Diary> thisDiary = Rx<Diary>(Diary());
-  final diaryCollection = FirebaseFirestore.instance.collection("diary");
+  RxString pickedImagePath = "".obs;
+  UserController userController = Get.put(UserController());
+
+  FirebaseStorage storage = FirebaseStorage.instance;
+  CollectionReference diaryCollection =
+      FirebaseFirestore.instance.collection("diary");
+
+  void changePickedImagePath(String path) {
+    pickedImagePath.value = path;
+  }
 
   void getdiaryMonthList(DateTime targetDate) {
     diaryMonthList.value = diaryList
@@ -48,6 +61,7 @@ class DiaryController extends GetxController {
                 contentGPT: doc['contentGPT'],
                 createdTime: doc['createdTime'],
                 reference: doc['reference'],
+                imageURL: doc['imageURL'],
               ))
           .toList();
     });
@@ -58,14 +72,27 @@ class DiaryController extends GetxController {
     print("[adddiary]1 $diary");
 
     final userId = FirebaseAuth.instance.currentUser!.uid;
+    print("[adddiary] start2");
+
+    String imageName = DateTime.now().millisecondsSinceEpoch.toString();
+    Reference ref = storage.ref().child('images/$imageName.jpg');
+    UploadTask uploadTask = ref.putFile(File(pickedImagePath.value));
+    print("[adddiary] start3");
+
+    TaskSnapshot snapshot = await uploadTask.whenComplete(() {});
+    print("[adddiary] start4");
+    String downloadUrl = await snapshot.ref.getDownloadURL();
+    print("[adddiary] start5");
 
     DocumentReference reference = diaryCollection.doc();
 
+    print("[adddiary] start6");
     await reference.set({
       'userid': userId,
-      'content': diary.content,
+      'content': userController.textController.text,
       'contentGPT': diary.contentGPT,
       'createdTime': FieldValue.serverTimestamp(),
+      'imageURL': downloadUrl,
       "reference": reference,
     });
     print("[adddiary] done");

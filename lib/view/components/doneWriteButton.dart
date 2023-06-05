@@ -30,7 +30,6 @@ class doneWriteButton extends StatelessWidget {
           print("GPT답변 : ");
           print(userController.contentGPT.value);
           Diary diary = Diary(
-            content: userController.content.value,
             contentGPT: userController.contentGPT.value,
           );
           await diaryController.addDiary(diary);

@@ -1,6 +1,8 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:holydiary/controller/diary_controller.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../resources/color_manager.dart';
@@ -15,7 +17,8 @@ class Todayphoto extends StatefulWidget {
 
 class _TodayphotoState extends State<Todayphoto> {
   late ImagePicker _imagePicker;
-  File? selectedImage;
+  var selectedImage;
+  DiaryController diaryController = Get.put(DiaryController());
 
   @override
   void initState() {
@@ -87,6 +90,7 @@ class _TodayphotoState extends State<Todayphoto> {
     if (pickedImage != null) {
       setState(() {
         selectedImage = File(pickedImage.path);
+        diaryController.changePickedImagePath(pickedImage.path);
       });
     }
   }
