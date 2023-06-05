@@ -105,6 +105,7 @@ class SettingPage extends StatelessWidget {
                     TextButton.icon(
                       onPressed: () async {
                         await userController.logOut();
+                        Get.toNamed(Routes.authPage);
                       },
                       icon: Icon(
                         Icons.phone_android,

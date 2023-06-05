@@ -45,6 +45,21 @@ class Writedfield extends StatelessWidget {
                 fontSize: 12,
               ),
             ),
+            Divider(
+              color: ColorManager.text,
+              thickness: 0.2,
+              height: 0,
+              indent: 20,
+              endIndent: 20,
+            ),
+            Text(
+              diary.contentGPT!,
+              style: TextStyle(
+                color: ColorManager.text,
+                fontWeight: FontWeightManager.medium,
+                fontSize: 12,
+              ),
+            ),
           ],
         ),
       ),

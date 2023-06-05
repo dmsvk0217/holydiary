@@ -57,7 +57,7 @@ List<GetPage<dynamic>> getPages = [
   ),
   GetPage(
     name: Routes.loginPage,
-    page: () => const LoginPage(), // edit
+    page: () => LoginPage(), // edit
     transition: Transition.fade,
   ),
 ];

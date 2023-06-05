@@ -24,7 +24,7 @@ class Writingfield extends StatelessWidget {
           children: [
             const TopText(),
             const SizedBox(height: 10),
-            DiaryTextFiled(userController: userController),
+            DiaryTextFiled(),
           ],
         ),
       ),
@@ -33,12 +33,11 @@ class Writingfield extends StatelessWidget {
 }
 
 class DiaryTextFiled extends StatelessWidget {
-  const DiaryTextFiled({
+  DiaryTextFiled({
     super.key,
-    required this.userController,
   });
 
-  final UserController userController;
+  final UserController userController = Get.put(UserController());
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +53,7 @@ class DiaryTextFiled extends StatelessWidget {
             borderRadius: BorderRadius.circular(10),
             color: Colors.black,
           ),
-          padding: const EdgeInsets.all(16),
+          padding: const EdgeInsets.symmetric(horizontal: 10),
           child: TextFormField(
             controller: textEditingController,
             onChanged: (value) {
