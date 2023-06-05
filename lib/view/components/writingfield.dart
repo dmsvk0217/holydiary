@@ -5,12 +5,10 @@ import 'package:holydiary/view/resources/color_manager.dart';
 import 'package:holydiary/view/resources/font_manager.dart';
 
 class Writingfield extends StatelessWidget {
-  const Writingfield({Key? key}) : super(key: key);
+  Writingfield({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    UserController userController = Get.put(UserController());
-
     return Center(
       child: Container(
         decoration: BoxDecoration(
@@ -18,7 +16,7 @@ class Writingfield extends StatelessWidget {
           color: ColorManager.textfield,
         ),
         width: 350,
-        height: 220,
+        height: 240,
         padding: const EdgeInsets.fromLTRB(30, 10, 30, 0),
         child: Column(
           children: [
@@ -58,16 +56,11 @@ class DiaryTextFiled extends StatelessWidget {
             focusNode: userController.focusNode,
             controller: textEditingController,
             onChanged: (value) {
-              final TextSelection previousCursorPos =
-                  textEditingController.selection;
-
               userController.content.value = value;
-
               textEditingController.text = value;
-              textEditingController.selection = previousCursorPos;
             },
-            maxLength: 3000,
-            maxLines: 1000,
+            // maxLength: 10,
+            maxLines: 50,
             style: TextStyle(
               color: ColorManager.text,
               fontWeight: FontWeightManager.medium,

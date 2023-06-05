@@ -97,7 +97,11 @@ class _TimelinePageState extends State<TimelinePage> {
                         ),
                       ),
                     )
-                  : ListView.builder(
+                  : ListView.separated(
+                      separatorBuilder: (BuildContext context, int index) =>
+                          const SizedBox(
+                        height: 20,
+                      ),
                       itemCount: diaryController.diaryMonthList.length,
                       itemBuilder: (context, index) {
                         Diary diary = diaryController.diaryMonthList[index];

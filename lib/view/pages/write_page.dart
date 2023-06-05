@@ -27,10 +27,10 @@ class _WritePageState extends State<WritePage> {
           children: [
             const SizedBox(height: 30),
             // 영성일기
-            const Writingfield(),
+            Writingfield(),
             const SizedBox(height: 30),
             // 사진으로쓰기
-            const Writingwithphoto(),
+            Writingwithphoto(),
             const SizedBox(height: 30),
             // 오늘의 사진
             const Todayphoto(),

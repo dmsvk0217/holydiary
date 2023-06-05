@@ -22,6 +22,11 @@ class UserController extends GetxController {
   RxString contentGPT = "".obs;
   RxString content = "".obs;
 
+  void changeContent() {
+    // Update the value of the textValue when the button is pressed
+    content.value = 'hello';
+  }
+
   void onInit() {
     super.onInit();
     FirebaseAuth.instance.authStateChanges().listen((User? user) async {

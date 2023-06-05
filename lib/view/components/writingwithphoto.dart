@@ -10,43 +10,10 @@ import 'package:holydiary/view/resources/font_manager.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:holydiary/util.dart';
 
-class Writingwithphoto extends StatefulWidget {
-  const Writingwithphoto({Key? key}) : super(key: key);
+class Writingwithphoto extends StatelessWidget {
+  Writingwithphoto({Key? key}) : super(key: key);
 
-  @override
-  State<Writingwithphoto> createState() => _WritingwithphotoState();
-}
-
-class _WritingwithphotoState extends State<Writingwithphoto> {
   UserController userController = Get.put(UserController());
-  String parsedtext = '';
-
-  Future _getFromGallery(BuildContext context) async {
-    final pickedFile =
-        await ImagePicker().pickImage(source: ImageSource.gallery);
-    if (pickedFile == null) return;
-
-    var bytes = File(pickedFile.path.toString()).readAsBytesSync();
-    String img64 = base64Encode(bytes);
-
-    var url = 'https://api.ocr.space/parse/image';
-    var payload = {
-      "base64Image": "data:image/jpg;base64,${img64.toString()}",
-      "language": "kor"
-    };
-    var header = {"apikey": "$ocrapikey"};
-
-    MyLoadingDialog.show(context);
-    var post = await http.post(Uri.parse(url), body: payload, headers: header);
-    var result = jsonDecode(post.body);
-    MyLoadingDialog.hide(context);
-
-    setState(() {
-      parsedtext = result['ParsedResults'][0]['ParsedText'];
-      userController.content.value = parsedtext;
-      print(parsedtext);
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -86,8 +53,9 @@ class _WritingwithphotoState extends State<Writingwithphoto> {
                 height: 150,
                 child: IconButton(
                   icon: const Icon(Icons.add),
-                  onPressed: () {
-                    _getFromGallery(context);
+                  onPressed: () async {
+                    await getTextIamgeFromGallery(context);
+                    Get.reload();
                   },
                   color: ColorManager.text,
                   iconSize: 70,

@@ -48,7 +48,7 @@ class Writedfield extends StatelessWidget {
             Divider(
               color: ColorManager.text,
               thickness: 0.2,
-              height: 0,
+              height: 20,
               indent: 20,
               endIndent: 20,
             ),
