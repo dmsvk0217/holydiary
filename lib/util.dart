@@ -69,7 +69,7 @@ Future<void> getTextIamgeFromGallery(BuildContext context) async {
   MyLoadingDialog.hide(context);
 
   parsedtext = result['ParsedResults'][0]['ParsedText'];
-  userController.content.value = parsedtext;
+  userController.textController.text = parsedtext;
   print("parsedtext");
   print(parsedtext);
 }

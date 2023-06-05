@@ -9,6 +9,10 @@ class UserController extends GetxController {
   RxString image = "".obs;
   RxString name = "".obs;
   RxInt bottomNavIndex = 0.obs;
+  RxString contentGPT = "".obs;
+  RxString content = "".obs;
+
+  final textController = TextEditingController();
 
   final focusNode = FocusNode();
 
@@ -17,10 +21,6 @@ class UserController extends GetxController {
     focusNode.dispose();
     super.onClose();
   }
-
-  // used in writing diary page
-  RxString contentGPT = "".obs;
-  RxString content = "".obs;
 
   void changeContent() {
     // Update the value of the textValue when the button is pressed

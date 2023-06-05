@@ -39,10 +39,6 @@ class DiaryTextFiled extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    TextEditingController textEditingController = TextEditingController(
-      text: userController.content.value,
-    );
-
     return Expanded(
       child: SingleChildScrollView(
         child: Container(
@@ -54,10 +50,9 @@ class DiaryTextFiled extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 10),
           child: TextFormField(
             focusNode: userController.focusNode,
-            controller: textEditingController,
+            controller: userController.textController,
             onChanged: (value) {
-              userController.content.value = value;
-              textEditingController.text = value;
+              userController.textController.text = value;
             },
             // maxLength: 10,
             maxLines: 50,
