@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class UserController extends GetxController {
@@ -8,6 +9,14 @@ class UserController extends GetxController {
   RxString image = "".obs;
   RxString name = "".obs;
   RxInt bottomNavIndex = 0.obs;
+
+  final focusNode = FocusNode();
+
+  @override
+  void onClose() {
+    focusNode.dispose();
+    super.onClose();
+  }
 
   // used in writing diary page
   RxString contentGPT = "".obs;

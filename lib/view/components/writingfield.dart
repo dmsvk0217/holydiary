@@ -55,6 +55,7 @@ class DiaryTextFiled extends StatelessWidget {
           ),
           padding: const EdgeInsets.symmetric(horizontal: 10),
           child: TextFormField(
+            focusNode: userController.focusNode,
             controller: textEditingController,
             onChanged: (value) {
               final TextSelection previousCursorPos =
