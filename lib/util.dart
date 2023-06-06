@@ -11,8 +11,19 @@ import 'dart:convert';
 import 'package:image_picker/image_picker.dart';
 
 final openaikey = dotenv.env['openaiapiKey'];
-final ocrapikey = dotenv.env['ocrapikey'];
 const apiUrl = 'https://api.openai.com/v1/engines/text-davinci-003/completions';
+
+final ocrapikey = dotenv.env['ocrapikey'];
+
+final naverId = dotenv.env['naverId'];
+final naverSecret = dotenv.env['naverSecret'];
+
+Future<String> getAnswer(String prompt) async {
+  String translatedPrompt = await getTranslation_papago(prompt, 1);
+  String gptAnswer = await generateText(translatedPrompt);
+  String translatedGPTAnswer = await getTranslation_papago(gptAnswer, 2);
+  return translatedGPTAnswer;
+}
 
 Future<String> generateText(String prompt) async {
   String generatedText = "";
@@ -27,7 +38,7 @@ Future<String> generateText(String prompt) async {
       //"model": "text-davinci-003",
       'prompt':
           "What is $prompt? Tell me like you're explaining to an eight-year-old.",
-      'max_tokens': 100,
+      'max_tokens': 1000,
       'temperature': 0,
       'top_p': 1,
       // 'frequency_penalty': 0,
@@ -72,4 +83,36 @@ Future<void> getTextIamgeFromGallery(BuildContext context) async {
   userController.textController.text = parsedtext;
   print("parsedtext");
   print(parsedtext);
+}
+
+///papago api
+Future<String> getTranslation_papago(String prompt, int option) async {
+  String clientId = '$naverId';
+  String clientSecret = '$naverSecret';
+  String contentType = "application/x-www-form-urlencoded; charset=UTF-8";
+  String url = "https://openapi.naver.com/v1/papago/n2mt";
+
+  http.Response trans = await http.post(
+    Uri.parse(url),
+    headers: {
+      'Content-Type': contentType,
+      'X-Naver-Client-Id': clientId,
+      'X-Naver-Client-Secret': clientSecret,
+      'Access-Control-Allow-Origin': '*', // CORS 허용
+    },
+    body: {
+      'source': option == 1 ? "ko" : "en", //위에서 언어 판별 함수에서 사용한 language 변수
+      'target': option == 1 ? "en" : "ko", //원하는 언어를 선택할 수 있다.
+      'text': prompt,
+    },
+  );
+  if (trans.statusCode == 200) {
+    var dataJson = jsonDecode(trans.body);
+    var resultPapago = dataJson['message']['result']['translatedText'];
+    print(resultPapago);
+    return resultPapago;
+  } else {
+    print(trans.statusCode);
+    return "fail to get papago result. trans.statusCode : ${trans.statusCode}";
+  }
 }

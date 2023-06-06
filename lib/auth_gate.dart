@@ -1,9 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:holydiary/controller/diary_controller.dart';
-import 'package:holydiary/controller/user_controller.dart';
-import 'package:flutterfire_ui/auth.dart';
 import 'package:holydiary/view/pages/build_page.dart';
 import 'package:holydiary/view/pages/login_page.dart';
 
