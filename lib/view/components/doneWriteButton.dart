@@ -8,6 +8,7 @@ import 'package:holydiary/util.dart';
 import 'package:holydiary/view/components/loadingdialog.dart';
 import 'package:holydiary/view/resources/color_manager.dart';
 import 'package:holydiary/view/resources/font_manager.dart';
+import 'package:http/http.dart';
 
 class doneWriteButton extends StatelessWidget {
   doneWriteButton({
@@ -25,8 +26,11 @@ class doneWriteButton extends StatelessWidget {
 
         try {
           MyLoadingDialog.show(context);
+          print("GPT prompt : ");
+          print(userController.content.value);
+
           userController.contentGPT.value =
-              await generateText(userController.content.value);
+              await getAnswer(userController.content.value);
           print("GPT답변 : ");
           print(userController.contentGPT.value);
           Diary diary = Diary(

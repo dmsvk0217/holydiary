@@ -22,9 +22,10 @@ class UserController extends GetxController {
     super.onClose();
   }
 
-  void changeContent() {
-    // Update the value of the textValue when the button is pressed
-    content.value = 'hello';
+  @override
+  void dispose() {
+    Get.delete<UserController>();
+    super.dispose();
   }
 
   void onInit() {

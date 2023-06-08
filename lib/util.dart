@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
+import 'package:holydiary/controller/diary_controller.dart';
 import 'package:holydiary/controller/user_controller.dart';
 import 'package:holydiary/view/components/loadingdialog.dart';
 import 'package:http/http.dart' as http;
@@ -43,7 +44,7 @@ Future<String> generateText(String prompt) async {
     body: jsonEncode({
       //"model": "text-davinci-003",
       'prompt':
-          "What is $prompt? Tell me like you're explaining to an eight-year-old.",
+          "Hi let's say you're a pastor who can give biblical advice. And please give me some biblical advice on what I wrote and also recommend some Bible words that fit this content. Please organize your answers so that they don't exceed 150 words. Next is my diary.$prompt.",
       'max_tokens': 1000,
       'temperature': 0,
       'top_p': 1,
@@ -87,6 +88,7 @@ Future<void> getTextIamgeFromGallery(BuildContext context) async {
 
   parsedtext = result['ParsedResults'][0]['ParsedText'];
   userController.textController.text = parsedtext;
+  userController.content.value = parsedtext;
   print("parsedtext");
   print(parsedtext);
 }

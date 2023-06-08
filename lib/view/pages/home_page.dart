@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:holydiary/controller/diary_controller.dart';
+import 'package:holydiary/model/diary.dart';
 import 'package:holydiary/view/components/writedfield.dart';
 import 'package:holydiary/view/resources/color_manager.dart';
 import 'package:holydiary/view/resources/styles_manager.dart';
@@ -22,7 +23,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    diaryController.getthisDiary(DateTime.now());
+    diaryController.gettodayDiary(DateTime.now());
   }
 
   @override
@@ -40,7 +41,7 @@ class _HomePageState extends State<HomePage> {
                 this.focusedDay = focusedDay;
                 print(this.selectedDay);
               });
-              diaryController.getthisDiary(this.selectedDay!);
+              diaryController.gettodayDiary(this.selectedDay!);
             },
             selectedDayPredicate: (day) {
               if (selectedDay == null) return false;
@@ -90,20 +91,30 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
           ),
-          Expanded(
-            child: ListView(
-              children: [
-                Obx(
-                  () => diaryController.thisDiary.value.userid != null
-                      ? Writedfield(diary: diaryController.thisDiary.value)
-                      : Text(
-                          "${DateFormat('MM월 dd일').format(selectedDay!)}의 일기가 존재하지 않습니다.",
-                          style: getMediumStyle(
-                            color: ColorManager.text,
-                          ),
+          Obx(
+            () => Expanded(
+              child: diaryController.todayDiary.length == 0
+                  ? Center(
+                      child: Text(
+                        "${DateFormat('MM월 dd일').format(selectedDay!)}의 일기가 존재하지 않습니다.",
+                        style: getMediumStyle(
+                          color: Colors.white,
                         ),
-                ),
-              ],
+                      ),
+                    )
+                  : ListView.separated(
+                      separatorBuilder: (BuildContext context, int index) =>
+                          const SizedBox(
+                        height: 20,
+                      ),
+                      itemCount: diaryController.todayDiary.length,
+                      itemBuilder: (context, index) {
+                        Diary diary = diaryController.todayDiary[index];
+                        print("diaryController.todayDiary.length != 0");
+                        print(diaryController.todayDiary.length != 0);
+                        return Writedfield(diary: diary);
+                      },
+                    ),
             ),
           ),
         ],

@@ -11,13 +11,19 @@ import 'package:intl/intl.dart'; // For date formatting
 class DiaryController extends GetxController {
   RxList<Diary> diaryList = RxList<Diary>([]);
   RxList<Diary> diaryMonthList = RxList<Diary>([]);
-  Rx<Diary> thisDiary = Rx<Diary>(Diary());
+  RxList<Diary> todayDiary = RxList<Diary>([]);
   RxString pickedImagePath = "".obs;
   UserController userController = Get.put(UserController());
 
   FirebaseStorage storage = FirebaseStorage.instance;
   CollectionReference diaryCollection =
       FirebaseFirestore.instance.collection("diary");
+
+  @override
+  void dispose() {
+    Get.delete<DiaryController>();
+    super.dispose();
+  }
 
   void changePickedImagePath(String path) {
     pickedImagePath.value = path;
@@ -37,18 +43,17 @@ class DiaryController extends GetxController {
     return;
   }
 
-  void getthisDiary(DateTime thisDay) {
+  void gettodayDiary(DateTime thisDay) {
+    List<Diary> todaysDiaries = [];
     Timestamp thisdayTimestamp = Timestamp.fromDate(thisDay);
-    thisDiary.value = diaryList.firstWhere(
-      (diary) {
-        print("--------------");
-        print(diary.createdTime!);
-        print(thisdayTimestamp);
-        return checkSameDay(diary.createdTime!, thisdayTimestamp);
-      },
-      orElse: () => Diary(),
-    );
-    print("thisDiary : ${thisDiary.value.content}");
+    for (Diary diary in diaryList) {
+      if (checkSameDay(diary.createdTime!, thisdayTimestamp)) {
+        todaysDiaries.add(diary);
+      }
+    }
+    Future.delayed(Duration(milliseconds: 100), () {
+      todayDiary.value = todaysDiaries;
+    });
   }
 
   void onInit() {
@@ -68,24 +73,16 @@ class DiaryController extends GetxController {
   }
 
   Future<void> addDiary(Diary diary) async {
-    print("[adddiary] start");
-    print("[adddiary]1 $diary");
-
     final userId = FirebaseAuth.instance.currentUser!.uid;
-    print("[adddiary] start2");
 
     String imageName = DateTime.now().millisecondsSinceEpoch.toString();
     Reference ref = storage.ref().child('images/$imageName.jpg');
     UploadTask uploadTask = ref.putFile(File(pickedImagePath.value));
-    print("[adddiary] start3");
 
     TaskSnapshot snapshot = await uploadTask.whenComplete(() {});
-    print("[adddiary] start4");
     String downloadUrl = await snapshot.ref.getDownloadURL();
-    print("[adddiary] start5");
 
     DocumentReference reference = diaryCollection.doc();
-    print("[adddiary] start6");
     await reference.set({
       'userid': userId,
       'content': userController.textController.text,

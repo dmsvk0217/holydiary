@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:holydiary/controller/user_controller.dart';
 import 'package:holydiary/view/resources/color_manager.dart';
@@ -53,6 +54,7 @@ class DiaryTextFiled extends StatelessWidget {
             controller: userController.textController,
             onChanged: (value) {
               userController.textController.text = value;
+              userController.content.value = value;
             },
             // maxLength: 10,
             maxLines: 50,
