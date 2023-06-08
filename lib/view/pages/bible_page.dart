@@ -44,7 +44,7 @@ class BiblePage extends StatelessWidget {
 //"assets/bible/Deuteronomy.txt".
   Future<String> loadAsset(String txtfileName) async {
     print("txtfileName : $txtfileName");
-    String mypath = path.join('assets', 'bible', txtfileName);
+    String mypath = "assets/bible/aa.txt";
     print("mypath : $mypath");
 
     String projectPath =

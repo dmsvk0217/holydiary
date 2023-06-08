@@ -19,9 +19,15 @@ final naverId = dotenv.env['naverId'];
 final naverSecret = dotenv.env['naverSecret'];
 
 Future<String> getAnswer(String prompt) async {
-  String translatedPrompt = await getTranslation_papago(prompt, 1);
+  String translatedPrompt = await getTranslationPapago(prompt, 1);
+  print("--------------translatedPrompt--------------");
+  print(translatedPrompt);
   String gptAnswer = await generateText(translatedPrompt);
-  String translatedGPTAnswer = await getTranslation_papago(gptAnswer, 2);
+  print("--------------gptAnswer--------------");
+  print(gptAnswer);
+  String translatedGPTAnswer = await getTranslationPapago(gptAnswer, 2);
+  print("--------------translatedGPTAnswer--------------");
+  print(translatedGPTAnswer);
   return translatedGPTAnswer;
 }
 
@@ -86,7 +92,7 @@ Future<void> getTextIamgeFromGallery(BuildContext context) async {
 }
 
 ///papago api
-Future<String> getTranslation_papago(String prompt, int option) async {
+Future<String> getTranslationPapago(String prompt, int option) async {
   String clientId = '$naverId';
   String clientSecret = '$naverSecret';
   String contentType = "application/x-www-form-urlencoded; charset=UTF-8";
