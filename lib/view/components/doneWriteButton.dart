@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/instance_manager.dart';
@@ -22,23 +24,14 @@ class doneWriteButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextButton(
       onPressed: () async {
-        // Action to perform when the button is pressed
-
         try {
           MyLoadingDialog.show(context);
-          print("GPT prompt : ");
-          print(userController.content.value);
-
           userController.contentGPT.value =
               await getAnswer(userController.content.value);
-          print("GPT답변 : ");
-          print(userController.contentGPT.value);
-          Diary diary = Diary(
-            contentGPT: userController.contentGPT.value,
-          );
+          Diary diary = Diary(contentGPT: userController.contentGPT.value);
           await diaryController.addDiary(diary);
+          userController.textController.text = "";
           MyLoadingDialog.hide(context);
-          userController.focusNode.unfocus();
         } catch (e) {
           print("Error on writing : $e");
         }

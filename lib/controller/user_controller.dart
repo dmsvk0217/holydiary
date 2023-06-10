@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +13,7 @@ class UserController extends GetxController {
   RxInt bottomNavIndex = 0.obs;
   RxString contentGPT = "".obs;
   RxString content = "".obs;
+  var selectedImage;
 
   final textController = TextEditingController();
 

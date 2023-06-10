@@ -34,9 +34,6 @@ class _WritePageState extends State<WritePage> {
             const SizedBox(height: 30),
             // 오늘의 사진
             const Todayphoto(),
-            const SizedBox(height: 30),
-            // 작성완료 버튼
-            doneWriteButton(),
           ],
         ),
       ),
