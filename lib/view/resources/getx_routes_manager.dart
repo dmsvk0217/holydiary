@@ -6,7 +6,6 @@ import 'package:holydiary/view/pages/bible_read_page.dart';
 import 'package:holydiary/view/pages/build_page.dart';
 import 'package:holydiary/view/pages/home_page.dart';
 import 'package:holydiary/view/pages/login_page.dart';
-import 'package:holydiary/view/pages/testcompo.dart';
 
 class Routes {
   static const String buildRoute = "/";
@@ -32,7 +31,7 @@ List<GetPage<dynamic>> getPages = [
   ),
   GetPage(
     name: Routes.authPage,
-    page: () => AuthGate(),
+    page: () => const AuthGate(),
     transition: Transition.fade,
   ),
   GetPage(
@@ -48,11 +47,6 @@ List<GetPage<dynamic>> getPages = [
   GetPage(
     name: Routes.resultPage,
     page: () => const ResultPage("dsff"),
-    transition: Transition.fade,
-  ),
-  GetPage(
-    name: Routes.testPage,
-    page: () => const Testcompo(),
     transition: Transition.fade,
   ),
   GetPage(
